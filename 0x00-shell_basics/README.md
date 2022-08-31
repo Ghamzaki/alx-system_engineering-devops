@@ -1,1 +1,1 @@
-Printing the type of the file named iamafile
+We are symbols, and inhabit symbols
