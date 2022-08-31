@@ -1,1 +1,1 @@
-Changing the working directory to the previous one
+Listing all files in the current directory and the parent of the working directory
