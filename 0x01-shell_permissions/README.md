@@ -1,1 +1,1 @@
-A script that adds execution permission to the owner, the group owner and the other users, to the file hello.
+A script that sets the mode of the file in a working directory.
