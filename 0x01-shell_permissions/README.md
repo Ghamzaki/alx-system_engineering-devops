@@ -1,1 +1,1 @@
-a script that sets execution permission of the file hello as all to other users
+a script that adds execute permission to all subdirectories of the current directory for the owner, the group owner and all other users. Regular files should not be changed
