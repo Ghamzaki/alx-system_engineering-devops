@@ -1,2 +1,0 @@
-#!/bin/bash Duplicate last line
-tail -n 1 iacta >> iacta Duplicate last line
