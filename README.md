@@ -1,4 +1,1 @@
-Shell
-Shebang
-Manipulation of files
-Scripting
+Shell, Shebang, Manipulation of files, Scripting
