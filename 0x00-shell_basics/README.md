@@ -1,2 +1,1 @@
-Bash
-RTFM,Shebang,working with commands
+Bash scripting basics
