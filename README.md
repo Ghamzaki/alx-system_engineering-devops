@@ -1,1 +1,4 @@
-0x00. Shell, basics
+Shell
+Shebang
+Manipulation of files
+Scripting
