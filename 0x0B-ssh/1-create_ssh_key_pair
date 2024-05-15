@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#creates an RSA key pair "school"
+
+ssh-keygen -t rsa -b 4096 -f school -P "betty"
