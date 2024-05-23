@@ -23,10 +23,17 @@ server {
     }
 }"
 
-bash -c "echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
+# Write the configuration to the default site configuration file
+echo "$SERVER_CONFIG" > /etc/nginx/sites-available/default
 
-if [ "$(pgrep -c nginx)" -le 0 ]; then
-	service nginx start
-else
-	service nginx restart
-fi
+# Create a symbolic link to enable the site (if not already existing)
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Test Nginx configuration for syntax errors
+nginx -t
+
+# Restart Nginx to apply the new configuration
+service nginx restart
+
+# Optional: Confirm Nginx is running and serving the redirect
+curl -I localhost/redirect_me
