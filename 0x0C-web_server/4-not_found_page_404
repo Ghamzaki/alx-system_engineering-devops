@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Update package list and install Nginx
+apt-get update
+apt-get -y install nginx
+
+# Allow HTTP traffic through the firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Ensure the web root directory exists and set permissions
+mkdir -p /var/www/html/
+sudo chmod -R 755 /var/www
+
+# Create a simple HTML file
+echo 'Hello World!' > /var/www/html/index.html
+
+# Create the custom 404 error page
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+
+# Define the Nginx server configuration
+SERVER_CONFIG="
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+}
+"
+
+# Write the configuration to the default site configuration file
+echo "$SERVER_CONFIG" > /etc/nginx/sites-available/default
+
+# Create a symbolic link to enable the site (if not already existing)
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Test Nginx configuration for syntax errors
+nginx -t
+
+# Restart Nginx to apply the new configuration
+service nginx restart
+
+# Optional: Confirm Nginx is running and serving the 404 page
+curl -I localhost/nonexistentpage
+curl localhost/nonexistentpage
